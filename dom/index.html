@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript DOM Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .todo-container {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #f4f4f4;
+            margin: 5px 0;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>DOM Manipulation Example</h2>
+
+    <!-- Button and paragraph -->
+    <button id="updateButton">Click Me</button>
+    <p id="message">This text will change when you click the button.</p>
+
+    <!-- To-Do List -->
+    <div class="todo-container">
+        <h3>To-Do List</h3>
+        <input type="text" id="todoInput" placeholder="Enter a new task">
+        <button id="addTask">Add Task</button>
+        <ul id="todoList"></ul>
+    </div>
+
+    <script>
+        // Button Click Event - Update Paragraph Text
+        document.getElementById("updateButton").addEventListener("click", function() {
+            document.getElementById("message").textContent = "You clicked the button!";
+        });
+
+        // To-Do List Functionality
+        document.getElementById("addTask").addEventListener("click", function() {
+            const taskInput = document.getElementById("todoInput");
+            const taskText = taskInput.value.trim();
+
+            if (taskText !== "") {
+                // Create new list item
+                const li = document.createElement("li");
+                li.textContent = taskText;
+
+                // Create a remove button
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.addEventListener("click", function() {
+                    li.remove();
+                });
+
+                // Append button to list item and add to list
+                li.appendChild(removeButton);
+                document.getElementById("todoList").appendChild(li);
+
+                // Clear input field
+                taskInput.value = "";
+            } else {
+                alert("Please enter a task.");
+            }
+        });
+    </script>
+    
+    
+<script src="app.js"></script>
+</body>
+</html>
